@@ -2,9 +2,9 @@ package routes
 
 import (
 	"encoding/json"
+	"github.com/CVWO/sample-go-app/backend/internal/handlers/users"
 	"net/http"
 
-	"github.com/CVWO/sample-go-app/internal/handlers/users"
 	"github.com/go-chi/chi/v5"
 )
 
