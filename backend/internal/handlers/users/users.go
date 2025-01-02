@@ -3,10 +3,10 @@ package users
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/CVWO/sample-go-app/backend/internal/api"
-	"github.com/CVWO/sample-go-app/backend/internal/dataaccess"
-	"github.com/CVWO/sample-go-app/backend/internal/database"
-	users "github.com/CVWO/sample-go-app/internal/dataaccess"
+	"backend/internal/api"
+	
+	"backend/internal/database"
+	users "backend/internal/dataaccess"
 	"net/http"
 
 	"github.com/pkg/errors"

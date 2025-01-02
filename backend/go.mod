@@ -1,4 +1,4 @@
-module github.com/CVWO/sample-go-app
+module backend
 
 go 1.18
 

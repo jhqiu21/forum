@@ -1,8 +1,8 @@
 package main
 
 import (
+	"backend/internal/router"
 	"fmt"
-	"github.com/CVWO/sample-go-app/internal/router"
 	"log"
 	"net/http"
 )
