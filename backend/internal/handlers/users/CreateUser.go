@@ -1,12 +1,12 @@
 package users
 
 import (
+	"backend/internal/api"
 	"encoding/json"
 	"fmt"
-	"backend/internal/api"
-	
-	"backend/internal/database"
+
 	users "backend/internal/dataaccess"
+	"backend/internal/database"
 	"net/http"
 
 	"github.com/pkg/errors"
