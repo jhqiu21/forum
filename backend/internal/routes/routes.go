@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"encoding/json"
 	"backend/internal/handlers/users"
+	"encoding/json"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
