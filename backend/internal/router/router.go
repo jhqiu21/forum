@@ -1,16 +1,12 @@
 package router
 
 import (
-	"backend/internal/routes"
-	"github.com/go-chi/chi/v5"
+	"backend/internal/handlers/posts"
+	"github.com/gorilla/mux"
 )
 
-func Setup() chi.Router {
-	r := chi.NewRouter()
-	setUpRoutes(r)
+func NewRouter() *mux.Router {
+	r := mux.NewRouter()
+	r.HandleFunc("/posts", posts.CreatePost).Methods("POST")
 	return r
-}
-
-func setUpRoutes(r chi.Router) {
-	r.Group(routes.GetRoutes())
 }

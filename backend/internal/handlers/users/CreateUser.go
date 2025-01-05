@@ -1,47 +1,31 @@
 package users
 
 import (
-	"backend/internal/api"
+	"backend/internal/dataaccess"
+	"backend/internal/models"
 	"encoding/json"
-	"fmt"
-
-	users "backend/internal/dataaccess"
-	"backend/internal/database"
 	"net/http"
-
-	"github.com/pkg/errors"
 )
 
 const (
-	ListUsers = "users.HandleList"
-
-	SuccessfulListUsersMessage = "Successfully listed users"
-	ErrRetrieveDatabase        = "Failed to retrieve database in %s"
-	ErrRetrieveUsers           = "Failed to retrieve users in %s"
-	ErrEncodeView              = "Failed to retrieve users in %s"
+	InvalidRequestBodyError = "Invalid request body"
+	CreateUserError         = "Error creating user"
 )
 
-func HandleList(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
-	db, err := database.GetDB()
+func CreateUser(w http.ResponseWriter, r *http.Request) {
+	var user models.User
+	err := json.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		http.Error(w, InvalidRequestBodyError, http.StatusBadRequest)
+		return
+	}
+	err = users.SaveUser(user)
 
 	if err != nil {
-		return nil, errors.Wrap(err, fmt.Sprintf(ErrRetrieveDatabase, ListUsers))
+		http.Error(w, CreateUserError, http.StatusInternalServerError)
+		return
 	}
 
-	users, err := users.List(db)
-	if err != nil {
-		return nil, errors.Wrap(err, fmt.Sprintf(ErrRetrieveUsers, ListUsers))
-	}
-
-	data, err := json.Marshal(users)
-	if err != nil {
-		return nil, errors.Wrap(err, fmt.Sprintf(ErrEncodeView, ListUsers))
-	}
-
-	return &api.Response{
-		Payload: api.Payload{
-			Data: data,
-		},
-		Messages: []string{SuccessfulListUsersMessage},
-	}, nil
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(user)
 }

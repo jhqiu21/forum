@@ -1,5 +1,5 @@
 # Sensitive variables
-.env
+backend/.env
 .env.local
 .env.*.local
 

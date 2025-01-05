@@ -3,8 +3,9 @@ package models
 import "fmt"
 
 type User struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Password string `json:"password"`
 }
 
 func (user *User) Greet() string {
